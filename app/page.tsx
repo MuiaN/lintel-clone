@@ -1,8 +1,8 @@
 'use client'
 
 import { useState } from 'react'
-import { Bell, MessageCircle, Search } from 'lucide-react'
 import Sidebar from '@/components/sidebar'
+import Topbar from '@/components/topbar'
 import StatCard from '@/components/stat-card'
 import CommissionChart from '@/components/commission-chart'
 import PipelineBoard from '@/components/pipeline-board'
@@ -19,6 +19,6 @@ export default function Overview() {
 
   return <main className={dark ? 'app dark' : 'app'}>
     <Sidebar dark={dark} onToggleTheme={() => setDark(value => !value)} />
-    <div className="content"><header><div><p className="eyebrow">Sunday, November 22, 2026</p><h1>Good morning, <span>Imani</span></h1></div><div className="header-actions"><button className="icon-btn" aria-label="Search"><Search size={18}/></button><button className="icon-btn" aria-label="Notifications"><Bell size={18}/><i/></button><button className="chat-toggle" onClick={() => setShowChat(value => !value)}><MessageCircle size={17}/> {showChat ? 'Hide chat' : 'Live chat'}</button></div></header><section className="metrics">{stats.map(stat => <StatCard key={stat.label} {...stat} />)}</section><div className="main-grid"><CommissionChart/><section className="card featured"><div className="property-image"><div className="image-label">Featured listing <span>01 / 10</span></div></div><div className="property-copy"><p className="eyebrow">For sale · La Jolla</p><h2>Hollis Modern House</h2><strong className="price">$1.24M</strong><div className="facts"><span>4 <small>bd</small></span><span>3 <small>ba</small></span><span>2,380 <small>ft²</small></span></div><p className="muted">23 days listed · 1,842 views</p><button className="outline-btn">Open listing</button></div></section></div><div className="lower-grid"><PipelineBoard/><Agenda/></div><div className="lower-grid"><Rentals/><TopAgents/></div><div className={showChat ? 'lower-grid' : 'single-grid'}><Activity/>{showChat && <LiveChat/>}</div></div>
+    <div className="content"><Topbar showChat={showChat} onToggleChat={() => setShowChat(value => !value)} /><section className="metrics">{stats.map(stat => <StatCard key={stat.label} {...stat} />)}</section><div className="main-grid"><CommissionChart/><section className="card featured"><div className="property-image"><div className="image-label">Featured listing <span>01 / 10</span></div></div><div className="property-copy"><p className="eyebrow">For sale · La Jolla</p><h2>Hollis Modern House</h2><strong className="price">$1.24M</strong><div className="facts"><span>4 <small>bd</small></span><span>3 <small>ba</small></span><span>2,380 <small>ft²</small></span></div><p className="muted">23 days listed · 1,842 views</p><button className="outline-btn">Open listing</button></div></section></div><div className="lower-grid"><PipelineBoard/><Agenda/></div><div className="lower-grid"><Rentals/><TopAgents/></div><div className={showChat ? 'lower-grid' : 'single-grid'}><Activity/>{showChat && <LiveChat/>}</div></div>
   </main>
 }
